@@ -1,0 +1,65 @@
+import { Button } from '@heroui/react';
+import Link from 'next/link';
+import React from 'react';
+import { FcGoogle } from 'react-icons/fc';
+
+const Register = () => {
+    return (
+         <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
+
+      <div className="w-full max-w-md bg-white border rounded-2xl p-6 shadow-sm">
+        <h2 className="text-2xl font-semibold text-center mb-6">
+          Create Account
+        </h2>
+        <form className="space-y-4">
+
+          <input
+            type="text"
+            placeholder="Name"
+            className="w-full px-4 py-2 border rounded-lg outline-none focus:ring-2 focus:ring-black"
+          />
+
+          <input
+            type="email"
+            placeholder="Email"
+            className="w-full px-4 py-2 border rounded-lg outline-none focus:ring-2 focus:ring-black"
+          />
+
+          <input
+            type="text"
+            placeholder="Photo URL"
+            className="w-full px-4 py-2 border rounded-lg outline-none focus:ring-2 focus:ring-black"
+          />
+
+          <input
+            type="password"
+            placeholder="Password"
+            className="w-full px-4 py-2 border rounded-lg outline-none focus:ring-2 focus:ring-black"
+          />
+
+          <button
+            type="submit"
+            className="w-full bg-black text-white py-2 rounded-lg hover:bg-gray-800 transition"
+          >
+            Register
+          </button>
+        </form>
+        <div className="my-4 text-center text-sm text-gray-400">
+          OR
+        </div>
+         <Button variant="outline" className="w-full border py-2 rounded-lg flex items-center justify-center gap-2 hover:bg-gray-100 transition">
+                  <span><FcGoogle /></span> Continue with Google
+                </Button>
+        <p className="text-sm text-center mt-4 text-gray-600">
+          Already have an account?{" "}
+          <Link href="/login" className="text-black font-medium">
+            Login
+          </Link>
+        </p>
+
+      </div>
+    </div>
+    );
+}
+
+export default Register;
