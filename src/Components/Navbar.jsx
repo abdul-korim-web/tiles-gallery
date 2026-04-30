@@ -22,9 +22,9 @@ export default function Navbar() {
         </div>
         <div className="flex items-center gap-3">
           {!user ? (
-        <Button   className="px-5 py-4 bg-black  text-white rounded-sm  text-xl ">
+        <Link href={`/login`}   className="px-5 py-1 bg-black  text-white rounded-xl  text-xl ">
           Login
-        </Button >
+        </Link >
           ) : (
             <>
               <Link href="/profile" className="text-sm font-medium">
