@@ -1,7 +1,7 @@
 import { Button } from "@heroui/react";
 import Image from "next/image";
 const fetchTile = async(tileId)=>{
-    const res = await fetch(`https://tiles-gallery-server.onrender.com/product/${tileId}`,{cache:"no-store"})
+    const res = await fetch(`https://tiles-gallery-server.onrender.com/product/${tileId}`)
     const data =await res.json()
     return data
 }
