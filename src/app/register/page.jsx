@@ -19,11 +19,11 @@ const Register = () => {
     const userData = Object.fromEntries(registerFormData.entries());
     const { data, error } = await authClient.signUp.email({
       ...userData,
-      callbackURL: "/login",
+      callbackURL: "/",
     });
     if (data) {
       toast.success("Thank you for signup");
-      router.push("/login");
+      router.push("/");
     } else {
       toast.error(error?.message);
     }
