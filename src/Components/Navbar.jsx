@@ -8,11 +8,13 @@ import Link from "next/link";
 import { useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import userLogo from "@/assets/user.png";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const { data, isPending } = useSession();
+  const pathName = usePathname()
+  console.log('pathName', pathName)
   const user = data?.user;
   const router = useRouter();
   const handelLogout = async () => {
@@ -30,24 +32,24 @@ export default function Navbar() {
       <div className=" mx-auto px-4 py-3 md:px-10 md:py-5 flex items-center justify-between">
         <Link
           href="/"
-          className="text-xl md:text-2xl font-bold italic font-mono animate__animated animate__backInLeft"
+          className={`text-xl md:text-2xl font-bold italic font-mono animate__animated animate__backInLeft`}
         >
           TilesHub
         </Link>
 
         <div className="hidden md:flex items-center gap-6 text-sm px-5 py-2 rounded-full border border-gray-200 shadow-sm bg-white animate__animated animate__backInDown">
-          <Link href="/" className="px-4 py-1 rounded-full hover:bg-gray-100 animate__animated animate__backInLeft ">
+          <Link href="/" className={`px-4 py-1 rounded-full hover:bg-gray-100 animate__animated animate__backInLeft ${pathName=='/' ? "bg-gray-100 text-black ":"text-gray-700"}`}>
             Home
           </Link>
           <Link
             href="/tiles"
-            className="px-4 py-1 rounded-full hover:bg-gray-100animate__animated animate__backInUp"
+            className={`px-4 py-1 rounded-full hover:bg-gray-100animate__animated animate__backInUp ${pathName=='/tiles' ? "bg-gray-100 text-black ":"text-gray-700"}`}
           >
             All Tiles
           </Link>
           <Link
             href="/profile"
-            className="px-4 py-1 rounded-full hover:bg-gray-100 animate__animated animate__backInRight"
+            className={`px-4 py-1 rounded-full hover:bg-gray-100 animate__animated animate__backInRight ${pathName=='/profile' ? "bg-gray-100 text-black ":"text-gray-700"}`}
           >
             My Profile
           </Link>
@@ -97,13 +99,13 @@ export default function Navbar() {
 
       {menuOpen && (
         <div className="md:hidden px-4 pb-4 pt-2 flex flex-col gap-3 text-sm border-t">
-          <Link href="/" onClick={() => setMenuOpen(false)}>
+          <Link className={`${pathName=='/' ? "text-blue-700 text-xl font-semibold":"text-gray-700"}`} href="/" onClick={() => setMenuOpen(false)}>
             Home
           </Link>
-          <Link href="/tiles" onClick={() => setMenuOpen(false)}>
+          <Link className={`${pathName=='/tiles' ? "text-blue-700 text-xl font-semibold":"text-gray-700"}`} href="/tiles" onClick={() => setMenuOpen(false)}>
             All Tiles
           </Link>
-          <Link href="/profile" onClick={() => setMenuOpen(false)}>
+          <Link className={`${pathName=='/profile' ? "text-blue-700 text-xl font-semibold":"text-gray-700"}`} href="/profile" onClick={() => setMenuOpen(false)}>
             My Profile
           </Link>
 
