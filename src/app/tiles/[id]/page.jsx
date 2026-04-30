@@ -1,9 +1,22 @@
 import { Button } from "@heroui/react";
 import Image from "next/image";
 const fetchTile = async(tileId)=>{
-    const res = await fetch(`https://tiles-gallery-server.onrender.com/product/${tileId}`)
-    const data = res.json()
+    const res = await fetch(`https://tiles-gallery-server.onrender.com/product/${tileId}`,{cache:"no-store"})
+    const data =await res.json()
     return data
+}
+export async function generateMetadata({ params }) {
+  const { id } =await params;
+
+  const res = await fetch(
+    `https://tiles-gallery-server.onrender.com/product/${id}`
+  );
+  const tiles = await res.json()
+
+  return {
+    title: tiles?.title || "Tiles Details",
+    description: tiles?.description?.slice(0, 150) || "Tiles details page",
+  };
 }
 export default async function TileDetailsPage({params}) {
 

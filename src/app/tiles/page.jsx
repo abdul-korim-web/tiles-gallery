@@ -3,7 +3,7 @@ import Link from "next/link";
 const getProducts = async () => {
   const fetchProduct = await fetch(
     "https://tiles-gallery-server.onrender.com/product",
-    { next: { revalidate: 86400 } },
+    { next: { revalidate: 864000 } },
   );
   const data = await fetchProduct.json();
   return data;
