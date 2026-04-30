@@ -19,5 +19,5 @@
 //   matcher: ["/tiles","/tiles/:path", "/profile"],
 // };
 const hi=()=>{
-    
+    console.log('hi', hi)
 }
