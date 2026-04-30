@@ -13,7 +13,7 @@ export default function ProfilePage() {
   const user = data?.user;
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-10">
+    <div className="max-w-4xl mx-auto px-4 py-10 animate__animated animate__fadeInDownBig">
       
       <div className="bg-white border rounded-2xl shadow-sm p-6 flex flex-col items-center text-center space-y-4">
         

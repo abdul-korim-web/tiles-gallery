@@ -28,7 +28,7 @@ const BestProducts = async () => {
         {bestTies.map((tile) => (
           <div
             key={tile.id}
-            className="border rounded-lg p-3 hover:shadow-md transition"
+            className="border rounded-lg p-3 hover:shadow-md transition animate__animated animate__backInRight"
           >
             <div className="relative h-28 w-full rounded mb-3 overflow-hidden">
               <Image

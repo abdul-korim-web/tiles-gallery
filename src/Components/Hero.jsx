@@ -6,7 +6,7 @@ const Hero = () => {
   return (
     <div>
       <div className="bg-gray-900 text-white py-24 text-center px-4">
-        <h1 className="text-3xl md:text-5xl font-bold mb-4">
+        <h1 className="text-3xl md:text-5xl font-bold mb-4 animate__animated animate__bounceInUp">
           Discover Your Perfect Aesthetic
         </h1>
         <p className="text-gray-300 mb-6 text-sm md:text-base">

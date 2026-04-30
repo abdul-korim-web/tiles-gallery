@@ -25,21 +25,22 @@ export default async function TilesPage() {
           />
         </div>
       </div>
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 ">
         {tiles.map((tile) => (
           <div
             key={tile.id}
-            className="border rounded-lg p-3 hover:shadow-md transition"
+            className="border rounded-lg p-3 hover:shadow-md transition animate__animated animate__fadeInDownBig"
           >
             <div className="relative h-28 w-full rounded mb-3 overflow-hidden">
               <Image
+              loading="lazy"
                 src={tile?.image}
                 alt={tile?.title || "tile image"}
                 fill
                 className="object-cover"
               />
             </div>
-            <h3 className="font-medium text-sm">{tile?.title}</h3>
+            <h3 className="font-medium text-sm ">{tile?.title}</h3>
             <p className="text-xs text-gray-500">৳{tile?.price}/sqft</p>
             <Link
               href={`/tiles/${tile.id}`}
