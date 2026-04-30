@@ -1,4 +1,5 @@
 "use client";
+import GoogleSingUp from "@/Components/GoogleSingUp";
 import { authClient } from "@/lib/auth-client";
 import { Button } from "@heroui/react";
 import Link from "next/link";
@@ -51,15 +52,7 @@ const Login = () => {
           </Button>
         </form>
         <div className="my-4 text-center text-sm text-gray-400">OR</div>
-        <Button
-          variant="outline"
-          className="w-full border py-2 rounded-lg flex items-center justify-center gap-2 hover:bg-gray-100 transition"
-        >
-          <span>
-            <FcGoogle />
-          </span>{" "}
-          Continue with Google
-        </Button>
+        <GoogleSingUp/>
         <p className="text-sm text-center mt-4 text-gray-600">
           Don’t have an account?{" "}
           <Link href="/register" className="text-black font-medium">
