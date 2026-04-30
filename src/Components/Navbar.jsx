@@ -1,53 +1,132 @@
 "use client";
 
+import { authClient, useSession } from "@/lib/auth-client";
 import { Button } from "@heroui/react";
+import { signOut } from "better-auth/api";
+import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
+import userLogo from "@/assets/user.png";
+import { useRouter } from "next/navigation";
 
 export default function Navbar() {
-  const [user, setUser] = useState(null);
   const [menuOpen, setMenuOpen] = useState(false);
+  const { data, isPending } = useSession();
+  const user = data?.user;
+  const router = useRouter();
+  const handelLogout = async () => {
+    await authClient.signOut({
+      fetchOptions: {
+        onSuccess: () => {
+          router.push("/login");
+        },
+      },
+    });
+  };
 
   return (
-    <nav className="w-full border-b bg-white md:px-10 md:py-3">
-      <div className=" px-4 py-3 flex items-center justify-between">
-        <Link href="/" className="text-2xl font-bold italic font-mono tracking-tight">
+    <nav className="w-full border-b bg-white/80 backdrop-blur-md sticky top-0 z-50">
+      <div className=" mx-auto px-4 py-3 md:px-10 md:py-5 flex items-center justify-between">
+        <Link
+          href="/"
+          className="text-xl md:text-2xl font-bold italic font-mono"
+        >
           TilesHub
         </Link>
-        <div className="hidden md:flex items-center gap-6 text-[18px] border py-1 px-5 rounded-full border-gray-200 shadow">
-          <Link href="/" className="hover:text-gray-600 border rounded-full  py-1 px-4 border-gray-200 shadow-2xl ">Home</Link>
-          <Link href="/tiles" className="hover:text-gray-600">All Tiles</Link>
-          <Link href="/profile" className="hover:text-gray-600">My Profile</Link>
+
+        <div className="hidden md:flex items-center gap-6 text-sm px-5 py-2 rounded-full border border-gray-200 shadow-sm bg-white">
+          <Link href="/" className="px-4 py-1 rounded-full hover:bg-gray-100">
+            Home
+          </Link>
+          <Link
+            href="/tiles"
+            className="px-4 py-1 rounded-full hover:bg-gray-100"
+          >
+            All Tiles
+          </Link>
+          <Link
+            href="/profile"
+            className="px-4 py-1 rounded-full hover:bg-gray-100"
+          >
+            My Profile
+          </Link>
         </div>
-        <div className="flex items-center gap-3">
-          {!user ? (
-        <Link href={`/login`}   className="px-5 py-1 bg-black  text-white rounded-xl  text-xl ">
-          Login
-        </Link >
+
+        <div className="flex items-center gap-2">
+          {isPending ? (
+            <span className="text-xs text-gray-500">Loading...</span>
+          ) : user ? (
+            <>
+              <Image
+                src={user?.image || userLogo}
+                alt="user"
+                width={32}
+                height={32}
+                className="rounded-full border"
+              />
+              <span className="hidden md:block text-sm font-medium">
+                {user?.name}
+              </span>
+              <Button
+                onClick={() => handelLogout()}
+                className="hidden md:flex rounded-full px-4 bg-black text-white text-xs"
+              >
+                Logout
+              </Button>
+            </>
           ) : (
             <>
-              <Link href="/profile" className="text-sm font-medium">
-                {user.name}
+              <Link
+                href="/login"
+                className="hidden md:inline-block px-4 py-1 rounded-full bg-black text-white text-xl"
+              >
+                Login
               </Link>
-              <button className="px-3 py-1.5 bg-black text-white rounded-md text-xl">
-                Logout
-              </button>
             </>
           )}
+
           <button
             onClick={() => setMenuOpen(!menuOpen)}
-            className="md:hidden text-lg"
+            className="md:hidden text-xl"
           >
-           <GiHamburgerMenu />
+            <GiHamburgerMenu />
           </button>
         </div>
       </div>
+
       {menuOpen && (
-        <div className="md:hidden px-4 pb-4 flex flex-col gap-3 text-sm">
-          <Link href="/" onClick={() => setMenuOpen(false)}>Home</Link>
-          <Link href="/tiles" onClick={() => setMenuOpen(false)}>All Tiles</Link>
-          <Link href="/profile" onClick={() => setMenuOpen(false)}>My Profile</Link>
+        <div className="md:hidden px-4 pb-4 pt-2 flex flex-col gap-3 text-sm border-t">
+          <Link href="/" onClick={() => setMenuOpen(false)}>
+            Home
+          </Link>
+          <Link href="/tiles" onClick={() => setMenuOpen(false)}>
+            All Tiles
+          </Link>
+          <Link href="/profile" onClick={() => setMenuOpen(false)}>
+            My Profile
+          </Link>
+
+          <div className="pt-3 border-t flex flex-col gap-2">
+            {user ? (
+              <>
+                <span className="text-sm font-medium">{user?.name}</span>
+                <Button
+                  onClick={() => handelLogout()}
+                  className="rounded-full bg-black text-white text-sm"
+                >
+                  Logout
+                </Button>
+              </>
+            ) : (
+              <Link
+                href="/login"
+                className="text-center px-4 py-2 rounded-full bg-black text-white text-sm"
+              >
+                Login
+              </Link>
+            )}
+          </div>
         </div>
       )}
     </nav>
