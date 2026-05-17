@@ -2,11 +2,11 @@ import Image from "next/image";
 import Link from "next/link";
 const getProducts = async () => {
   const fetchProduct = await fetch(
-    "https://tiles-gallery-server.onrender.com/product",
+    "https://tiles-gallery-server.vercel.app/product",
     { next: { revalidate: 864000 } },
   );
   const data = await fetchProduct.json();
-  return data;
+  return data?.product;
 };
 export default async function TilesPage() {
   const tiles = await getProducts();
