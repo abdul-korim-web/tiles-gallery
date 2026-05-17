@@ -3,11 +3,11 @@ import Link from "next/link";
 import React from "react";
 const getProducts = async () => {
   const fetchProduct = await fetch(
-    "https://tiles-gallery-server.onrender.com/product",
+    "https://tiles-gallery-server.vercel.app/product",
     { next: { revalidate: 864000 } },
   );
   const data = await fetchProduct.json();
-  return data;
+  return data?.product;
 };
 const BestProducts = async () => {
   const tiles = await getProducts();

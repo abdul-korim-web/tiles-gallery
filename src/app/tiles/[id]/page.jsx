@@ -1,8 +1,13 @@
 import { Button } from "@heroui/react";
 import Image from "next/image";
 const fetchTile = async(tileId)=>{
-    const res = await fetch(`https://tiles-gallery-server.vercel.app/product/${tileId}`)
-    const data =await res.json()
+    const res = await fetch(`https://tiles-gallery-server.vercel.app/product/${tileId}`,{
+      cache:"no-store"
+    })
+  if (!res.ok) {
+    return { error: true };
+  }
+  const data = await res.json();
     return data?.singleProduct
 }
 export async function generateMetadata({ params }) {
